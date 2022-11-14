@@ -2,6 +2,8 @@ from tokenize import Name
 from unicodedata import name
 from django.db import models
 
+from super_types.models import Super_Types
+
 # Create your models here.
 class Super(models.Model):
     name : models.CharField(max_length=255)
