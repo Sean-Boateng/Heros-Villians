@@ -6,8 +6,8 @@ SECRET_KEY = 'django-insecure-gldakih@(@q-zt^wj=^4v9#_&eqdkc5^oao)+^#6nzb@#fni7=
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'h&v_database',
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'hv_database',
         'USER': 'root',
         'PASSWORD': 'flyhigh20',
         'HOST': '127.0.0.1',
