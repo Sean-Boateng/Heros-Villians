@@ -1,24 +1,43 @@
-from django import views
+
+
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from supers import serializers
+
+ 
 from rest_framework import status
 
 
-from supers.models import Super
-from supers.serializers import SuperSerializer
+from .models import Super
+from .serializers import SuperSerializer
 
 
-@api_view(['POST'])
+@api_view(['GET','POST'])
 def supers_list(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+
+        type_name= request.query_params.get('type')
+        print(type_name)
+
+        queryset = Super.objects.all()
+
+        if type_name:
+            queryset= queryset.filter(super_type__type_of_super=type_name)
+
+        
+
+        serializer = SuperSerializer(queryset,many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
         serializer = SuperSerializer(data = request.data)
         if serializer.is_valid() == True:
             serializer.save()
             return Response(serializer.data,status=201)
         else:
             return Response(serializer.errors,status=400)
+            
+    
 
 
 
